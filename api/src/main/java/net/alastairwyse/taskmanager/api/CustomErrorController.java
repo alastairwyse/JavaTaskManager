@@ -35,14 +35,14 @@ import org.springframework.boot.web.servlet.error.ErrorController;
 @RestController
 @Hidden
 public class CustomErrorController implements ErrorController {
-	
-	/**
-	 * @returns An {@link HttpErrorResponse} stating that no resource exists at the specified URL.
-	 */
-	@RequestMapping(value = "/error")
-	@ApiResponse(responseCode = "400")
-	public HttpErrorResponse returnDefaultError() {
-		return new HttpErrorResponse("BadRequest", "No resource exists at the specified URL.");
-	}
+    
+    /**
+     * @returns An {@link HttpErrorResponse} stating that no resource exists at the specified URL.
+     */
+    @RequestMapping(value = "/error")
+    @ApiResponse(responseCode = "400")
+    public HttpErrorResponse returnDefaultError() {
+        return new HttpErrorResponse("BadRequest", "No resource exists at the specified URL.");
+    }
 }
 

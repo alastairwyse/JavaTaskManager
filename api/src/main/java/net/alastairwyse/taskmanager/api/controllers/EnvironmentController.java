@@ -39,7 +39,7 @@ public class EnvironmentController {
     @Operation(summary = "Returns the current deployment environment")
     @GetMapping("")
     @ApiResponse(responseCode = "200")
-	public String getEnvironment() {
+    public String getEnvironment() {
 
         return "local-development";
     }

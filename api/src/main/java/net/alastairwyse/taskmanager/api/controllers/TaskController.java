@@ -102,9 +102,9 @@ public class TaskController {
     @Operation(summary = "Returns all tasks")
     @GetMapping("")
     @ApiResponse(responseCode = "200")
-	public Iterable<TaskDto> getTasks() {
+    public Iterable<TaskDto> getTasks() {
 
-		var allTasks = new ArrayList<Task>();
+        var allTasks = new ArrayList<Task>();
         for (Task currentTask : taskManager.getAllTasks()) {
             allTasks.add(currentTask);
         }
@@ -112,8 +112,8 @@ public class TaskController {
             return new TaskDto(inputTask);
         };
 
-	   	return new ArrayListIteratorConverter<Task, TaskDto>(allTasks, conversionFunction);
-	}
+           return new ArrayListIteratorConverter<Task, TaskDto>(allTasks, conversionFunction);
+    }
 
     /**
      * Deletes the specified task from the manager.
