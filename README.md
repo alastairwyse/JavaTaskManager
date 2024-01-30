@@ -27,7 +27,7 @@ The repository contains two separate Maven Java projects...
 | Folder | Description |
 | ------ | ----------- |
 | service | Class library that provides the core CRUD functionality for tasks via the [DefaultTaskManager](https://github.com/alastairwyse/JavaTaskManager/blob/27a9e01af8e29082ad8c030910fa8a2814446b95/service/src/main/java/net/alastairwyse/taskmanager/DefaultTaskManager.java) class |
-| api | A Spring Boot which exposes the CRUD functionality via a REST API |
+| api | A Spring Boot application which exposes the CRUD functionality via a REST API |
 
 The 'api' project references the 'service' project via Maven, specifically the following section of the pom.xml file...
 
