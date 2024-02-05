@@ -38,7 +38,7 @@ import net.alastairwyse.taskmanager.validation.PropertyValidationResult;
 public class ValidationController {
     
     /**
-     * Constructs a TaskController.
+     * Constructs a ValidationController.
      */
     public ValidationController() {
     }

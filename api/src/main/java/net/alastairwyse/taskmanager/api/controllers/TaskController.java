@@ -97,7 +97,7 @@ public class TaskController {
     /**
      * Returns all tasks in the manager.
      * 
-     * @return All tasks
+     * @return All tasks.
      */
     @Operation(summary = "Returns all tasks")
     @GetMapping("")
@@ -112,7 +112,7 @@ public class TaskController {
             return new TaskDto(inputTask);
         };
 
-           return new ArrayListIteratorConverter<Task, TaskDto>(allTasks, conversionFunction);
+        return new ArrayListIteratorConverter<Task, TaskDto>(allTasks, conversionFunction);
     }
 
     /**
@@ -132,6 +132,12 @@ public class TaskController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
+    /**
+     * Retrieves a single task from the task manager.
+     * 
+     * @param id The id of the task to retrieve.
+     * @return The task.
+     */
     @Operation(summary = "Retrieves the task with the specified id")
     @GetMapping("/{id}")
     @ApiResponse(responseCode = "200", description = "Task retrieved successfully")
