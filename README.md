@@ -79,6 +79,10 @@ The table below compares some of the key annotations and classes used in buildin
 | [@PathVariable](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PathVariable.html) | [link](https://github.com/alastairwyse/JavaTaskManager/blob/27a9e01af8e29082ad8c030910fa8a2814446b95/api/src/main/java/net/alastairwyse/taskmanager/api/controllers/TaskController.java#L141) | [\[FromRoute\]](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.fromrouteattribute?view=aspnetcore-8.0) | Specify that controller method parameter should be taken from the request URL |
 | [@SpringBootTest](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/context/SpringBootTest.html) | [link](https://github.com/alastairwyse/JavaTaskManager/blob/27a9e01af8e29082ad8c030910fa8a2814446b95/api/src/test/java/net/alastairwyse/taskmanager/api/controllers/TaskControllerIntegrationTests.java#L63) | [WebApplicationFactory<TEntryPoint>](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1?view=aspnetcore-8.0) | Define and run integration / end-to-end tests (i.e. tests which run a real instance of the web API application, and test via HTTP requests) |
 
+## Other Features
+Listed below are some other Spring Boot features which are not used in this project, but useful for future reference...
+* [This article](https://www.baeldung.com/spring-shutdown-callbacks) lists some options to provide similar functionality to the [IHostedService](https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.hosting.ihostedservice?view=dotnet-plat-ext-8.0) [interface](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-8.0&tabs=visual-studio#ihostedservice-interface) in ASP.NET Core.
+
 ## TODO
 
 * DTO classes are a concern of the 'api' project, not the 'service' project, so should be moved to that project.
