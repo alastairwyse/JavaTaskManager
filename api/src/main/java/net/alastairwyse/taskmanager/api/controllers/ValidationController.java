@@ -36,7 +36,7 @@ import net.alastairwyse.taskmanager.validation.PropertyValidationResult;
 @RequestMapping("/api/validation")
 @Tag(name = "Validation")
 public class ValidationController {
-    
+
     /**
      * Constructs a ValidationController.
      */
