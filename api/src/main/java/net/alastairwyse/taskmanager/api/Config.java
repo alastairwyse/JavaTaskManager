@@ -19,6 +19,7 @@ package net.alastairwyse.taskmanager.api;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,20 +33,24 @@ import net.alastairwyse.taskmanager.models.dtos.TaskDto;
 
 // References
 //  https://www.tabnine.com/code/java/classes/io.swagger.v3.oas.annotations.info.Info
+//  https://springdoc.org/#migrating-from-springfox
 
 /**
  * Common configuration for the task manager REST API.
  */
 @Configuration
-    @OpenAPIDefinition(
-        info = @Info(
-            title = "Task Manager",
-            version = "1.0.0",
-            description = "Simple task manager API"
-        )
+@OpenAPIDefinition(
+    info = @Info(
+        title = "Task Manager",
+        version = "1",
+        description = "Simple task manager API"
+    )
 )
 public class Config {
     
+    /**
+     * Bean which contains the singleton {@link TaskManager} which underlies the REST API.
+     */
     @Bean
     @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
     public TaskManager TaskManagerBean() {
@@ -65,5 +70,16 @@ public class Config {
         returnTaskManager.createTask(testTaskDto2);
 
         return returnTaskManager;
+    }
+
+    /**
+     * Bean which defines the swagger grouping for version 1 of the API.
+     */
+    @Bean
+    public GroupedOpenApi apiVersion1() {
+        return GroupedOpenApi.builder()
+            .group("Task Manager API v1")
+            .pathsToMatch("/api/v1/**")
+            .build();
     }
 }

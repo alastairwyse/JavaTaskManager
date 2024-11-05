@@ -48,7 +48,7 @@ import net.alastairwyse.taskmanager.models.dtos.*;
  * Controller which exposes CRUD methods for managing a collection of {@link Task} objects.
  */
 @RestController
-@RequestMapping("/api/task")
+@RequestMapping("/api/v1/task")
 @Tag(name = "Task")
 public class TaskController {
     

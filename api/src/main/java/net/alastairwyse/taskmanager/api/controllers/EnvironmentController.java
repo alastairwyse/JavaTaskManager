@@ -27,7 +27,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
  * Controller which exposes the current deployment environment of the application (e.g. 'Development, 'Staging', 'UAT', 'Production', etc...).
  */
 @RestController
-@RequestMapping("/api/environment")
+@RequestMapping("/api/v1/environment")
 @Tag(name = "Environment")
 public class EnvironmentController {
     

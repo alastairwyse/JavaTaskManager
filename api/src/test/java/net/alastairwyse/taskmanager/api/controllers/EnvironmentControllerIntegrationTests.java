@@ -52,7 +52,7 @@ public class EnvironmentControllerIntegrationTests extends IntegrationTestsBase 
     @Test
     public void validateNewTaskDto() throws Exception {
         
-        MvcResult result = mvc.perform(get("/api/environment")
+        MvcResult result = mvc.perform(get("/api/v1/environment")
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))

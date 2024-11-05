@@ -106,7 +106,7 @@ public class TaskControllerIntegrationTests extends IntegrationTestsBase {
         var returnTask = new Task(testNewTaskDto);
         Mockito.when(mockTaskManager.createTask(newTaskDtoCaptor.capture())).thenReturn(returnTask);
 
-        MvcResult result = mvc.perform(post("/api/task")
+        MvcResult result = mvc.perform(post("/api/v1/task")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(newTaskDtoJson.toString()))
@@ -130,7 +130,7 @@ public class TaskControllerIntegrationTests extends IntegrationTestsBase {
 
         JsonNode taskDtoJson = ConvertTaskDtoToJson(testTaskDto);
 
-        mvc.perform(put("/api/task")
+        mvc.perform(put("/api/v1/task")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(taskDtoJson.toString()))
@@ -153,7 +153,7 @@ public class TaskControllerIntegrationTests extends IntegrationTestsBase {
         var mockException = new TaskDoesntExistException(mockExceptionMessage);
         doThrow(mockException).when(mockTaskManager).updateTask(any(Task.class));
 
-        MvcResult result = mvc.perform(put("/api/task")
+        MvcResult result = mvc.perform(put("/api/v1/task")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(taskDtoJson.toString()))
@@ -173,7 +173,7 @@ public class TaskControllerIntegrationTests extends IntegrationTestsBase {
         testTasks.add(testTask2);
         Mockito.when(mockTaskManager.getAllTasks()).thenReturn(testTasks);
 
-        MvcResult result = mvc.perform(get("/api/task")
+        MvcResult result = mvc.perform(get("/api/v1/task")
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -192,7 +192,7 @@ public class TaskControllerIntegrationTests extends IntegrationTestsBase {
         
         JsonNode taskDtoJson = ConvertTaskDtoToJson(testTaskDto);
 
-        mvc.perform(delete("/api/task")
+        mvc.perform(delete("/api/v1/task")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(taskDtoJson.toString()))
@@ -215,7 +215,7 @@ public class TaskControllerIntegrationTests extends IntegrationTestsBase {
         var mockException = new TaskDoesntExistException(mockExceptionMessage);
         doThrow(mockException).when(mockTaskManager).deleteTask(any(Task.class));
 
-        MvcResult result = mvc.perform(delete("/api/task")
+        MvcResult result = mvc.perform(delete("/api/v1/task")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(taskDtoJson.toString()))
@@ -232,7 +232,7 @@ public class TaskControllerIntegrationTests extends IntegrationTestsBase {
         
         Mockito.when(mockTaskManager.getTask(testTask1.getId())).thenReturn(testTask1);
 
-        MvcResult result = mvc.perform(get("/api/task/" + testTask1.getId().toString())
+        MvcResult result = mvc.perform(get("/api/v1/task/" + testTask1.getId().toString())
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -250,7 +250,7 @@ public class TaskControllerIntegrationTests extends IntegrationTestsBase {
         var mockException = new TaskDoesntExistException(mockExceptionMessage);
         doThrow(mockException).when(mockTaskManager).getTask(testTask1.getId());
 
-        MvcResult result = mvc.perform(get("/api/task/" + testTask1.getId().toString())
+        MvcResult result = mvc.perform(get("/api/v1/task/" + testTask1.getId().toString())
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNotFound())
             .andReturn();

@@ -72,7 +72,7 @@ public class MiddlewareIntegrationTests extends IntegrationTestsBase {
     @Test
     public void nonJsonAcceptHeader() throws Exception {
 
-        MvcResult result = mvc.perform(get("/api/task")
+        MvcResult result = mvc.perform(get("/api/v1/task")
                 .accept(MediaType.APPLICATION_PDF))
             .andExpect(status().isNotAcceptable())
             .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -85,19 +85,19 @@ public class MiddlewareIntegrationTests extends IntegrationTestsBase {
     @Test
     public void invalidUrlPath() throws Exception {
 
-        MvcResult result = mvc.perform(get("/api/invalid")
+        MvcResult result = mvc.perform(get("/api/v1/invalid")
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isBadRequest())
             .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
             .andReturn();
 
         JsonNode jsonResult = objectMapper.readTree(result.getResponse().getContentAsString());
-        AssertJsonNodeContainsHttpErrorResponse(jsonResult, NoResourceFoundException.class.getSimpleName(), "No resource exists at URL 'api/invalid'.");
+        AssertJsonNodeContainsHttpErrorResponse(jsonResult, NoResourceFoundException.class.getSimpleName(), "No resource exists at URL 'api/v1/invalid'.");
         assertTrue(jsonResult.get("attributes") instanceof ArrayNode); 
         ArrayNode attributes = (ArrayNode)jsonResult.get("attributes");
         assertEquals(2, attributes.size());
         assertTrue(attributes.get(0).has("ResourcePath"));
-        assertEquals("api/invalid", attributes.get(0).get("ResourcePath").asText());
+        assertEquals("api/v1/invalid", attributes.get(0).get("ResourcePath").asText());
         assertTrue(attributes.get(1).has("HttpMethod"));
         assertEquals("GET", attributes.get(1).get("HttpMethod").asText());
     }
@@ -105,7 +105,7 @@ public class MiddlewareIntegrationTests extends IntegrationTestsBase {
     @Test
     public void unsupportedHttpMethod() throws Exception {
 
-        MvcResult result = mvc.perform(patch("/api/task")
+        MvcResult result = mvc.perform(patch("/api/v1/task")
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isMethodNotAllowed())
             .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -123,7 +123,7 @@ public class MiddlewareIntegrationTests extends IntegrationTestsBase {
     @Test
     public void invalidUrlParameter() throws Exception {
 
-        MvcResult result = mvc.perform(get("/api/task/123")
+        MvcResult result = mvc.perform(get("/api/v1/task/123")
             .accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isBadRequest())
         .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -144,7 +144,7 @@ public class MiddlewareIntegrationTests extends IntegrationTestsBase {
     @Test
     public void missingBodyParameter() throws Exception {
 
-        MvcResult result = mvc.perform(post("/api/task")
+        MvcResult result = mvc.perform(post("/api/v1/task")
             .accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isBadRequest())
         .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))

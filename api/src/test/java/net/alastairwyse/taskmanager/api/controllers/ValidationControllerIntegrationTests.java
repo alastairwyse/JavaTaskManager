@@ -74,7 +74,7 @@ public class ValidationControllerIntegrationTests extends IntegrationTestsBase {
         testNewTaskDto.setTitle("");
         JsonNode newTaskDtoJson = ConvertNewTaskDtoToJson(testNewTaskDto);
 
-        MvcResult result = mvc.perform(post("/api/validation/newTaskDto")
+        MvcResult result = mvc.perform(post("/api/v1/validation/newTaskDto")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(newTaskDtoJson.toString()))
@@ -92,7 +92,7 @@ public class ValidationControllerIntegrationTests extends IntegrationTestsBase {
         testTaskDto.setTitle("");
         JsonNode taskDtoJson = ConvertTaskDtoToJson(testTaskDto);
 
-        MvcResult result = mvc.perform(post("/api/validation/taskDto")
+        MvcResult result = mvc.perform(post("/api/v1/validation/taskDto")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(taskDtoJson.toString()))

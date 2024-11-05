@@ -33,7 +33,7 @@ import net.alastairwyse.taskmanager.validation.PropertyValidationResult;
  * Controller which validates data sent to the API.
  */
 @RestController
-@RequestMapping("/api/validation")
+@RequestMapping("/api/v1/validation")
 @Tag(name = "Validation")
 public class ValidationController {
 
