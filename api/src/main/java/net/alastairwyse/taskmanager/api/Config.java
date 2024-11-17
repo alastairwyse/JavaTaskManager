@@ -25,7 +25,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -43,7 +42,6 @@ import net.alastairwyse.taskmanager.models.dtos.TaskDto;
  * Common configuration for the task manager REST API.
  */
 @Configuration
-@EnableWebMvc
 @OpenAPIDefinition(
     info = @Info(
         title = "Task Manager",
@@ -88,7 +86,10 @@ public class Config implements WebMvcConfigurer {
             .build();
     }
 
-    // TODO: Not working yet
+    /**
+     * Bean which enables CORS across all controller endpoints.
+     */
+    @Bean
     public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
 			@Override
