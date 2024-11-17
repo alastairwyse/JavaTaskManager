@@ -80,6 +80,13 @@ The table below compares some of the key annotations and classes used in buildin
 | [@SpringBootTest](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/context/SpringBootTest.html) | [link](https://github.com/alastairwyse/JavaTaskManager/blob/27a9e01af8e29082ad8c030910fa8a2814446b95/api/src/test/java/net/alastairwyse/taskmanager/api/controllers/TaskControllerIntegrationTests.java#L63) | [WebApplicationFactory<TEntryPoint>](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1?view=aspnetcore-8.0) | Define and run integration / end-to-end tests (i.e. tests which run a real instance of the web API application, and test via HTTP requests) |
 | [URLEncoder.encode()](https://docs.oracle.com/javase/8/docs/api/java/net/URLEncoder.html#encode-java.lang.String-java.lang.String-) |  | [Uri.EscapeDataString()](https://learn.microsoft.com/en-us/dotnet/api/system.uri.escapedatastring?view=net-8.0) | URL-encode endpoint parameters passed in path or query.  N.b. Java URLEncoder.encode() is designed for encoding form data, and hence spaces are encoded as '+' rather than '%20'.  Need to subsequently apply String.replace() to encode spaces as '%20'. |
 | [GroupedOpenApi](https://springdoc.org/#migrating-from-springfox) | [link](https://github.com/alastairwyse/JavaTaskManager/blob/4445e84059f83ae0e8666884afb68b13aab04c42/api/src/main/java/net/alastairwyse/taskmanager/api/Config.java#L79) | IServiceCollection.AddApiVersioning() and IServiceCollection.AddVersionedApiExplorer() (now superseded by [Asp.Versioning.Mvc](https://www.nuget.org/packages/Asp.Versioning.Mvc)) | Add API versioning support to Swagger.  Implementation will be different if using SpringFox rather than springdoc-openapi (via Docket class rather than GroupedOpenApi) |
+| [CorsRegistry.addMapping().allowedOrigins()](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/servlet/config/annotation/CorsRegistry.html) | TODO | [Services.AddCors](https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.corsservicecollectionextensions.addcors?view=aspnetcore-9.0) | Add CORS support. |
+
+## References
+
+### Enabling CORS
+* https://spring.io/guides/gs/rest-service-cors
+* https://www.baeldung.com/spring-cors
 
 ## Other Features
 Listed below are some other Spring Boot features which are not used in this project, but useful for future reference...

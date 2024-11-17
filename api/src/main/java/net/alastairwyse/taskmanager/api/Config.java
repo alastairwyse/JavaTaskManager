@@ -24,6 +24,10 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 
@@ -39,6 +43,7 @@ import net.alastairwyse.taskmanager.models.dtos.TaskDto;
  * Common configuration for the task manager REST API.
  */
 @Configuration
+@EnableWebMvc
 @OpenAPIDefinition(
     info = @Info(
         title = "Task Manager",
@@ -46,7 +51,7 @@ import net.alastairwyse.taskmanager.models.dtos.TaskDto;
         description = "Simple task manager API"
     )
 )
-public class Config {
+public class Config implements WebMvcConfigurer {
     
     /**
      * Bean which contains the singleton {@link TaskManager} which underlies the REST API.
@@ -82,4 +87,14 @@ public class Config {
             .pathsToMatch("/api/v1/**")
             .build();
     }
+
+    // TODO: Not working yet
+    public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**").allowedOrigins("http://localhost:3000");
+			}
+		};
+	}
 }
