@@ -16,6 +16,7 @@
 
 package net.alastairwyse.taskmanager.api;
 
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,6 +26,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -56,7 +58,7 @@ public class Config implements WebMvcConfigurer {
      */
     @Bean
     @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
-    public TaskManager TaskManagerBean() {
+    public TaskManager addTaskManager() {
         var returnTaskManager = new DefaultTaskManager();
         // TODO: Remove test tasks
         var testTaskDto1 = new TaskDto();
@@ -79,7 +81,7 @@ public class Config implements WebMvcConfigurer {
      * Bean which defines the swagger grouping for version 1 of the API.
      */
     @Bean
-    public GroupedOpenApi apiVersion1() {
+    public GroupedOpenApi addApiVersion1() {
         return GroupedOpenApi.builder()
             .group("Task Manager API v1")
             .pathsToMatch("/api/v1/**")
@@ -87,15 +89,21 @@ public class Config implements WebMvcConfigurer {
     }
 
     /**
-     * Bean which enables CORS across all controller endpoints.
+     * Enable CORS across all controller endpoints.
      */
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:3000");
-            }
-        };
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**").allowedOrigins("http://localhost:3000");
+    }
+
+    /**
+     * Instantiate the AcceptHeaderParsingHandlerInterceptor configured with the valid accept headers for the API
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        var validAcceptHeaderValues = new ArrayList<String>();
+        validAcceptHeaderValues.add("*/*");
+        validAcceptHeaderValues.add("application/json");
+        registry.addInterceptor(new AcceptHeaderParsingHandlerInterceptor(validAcceptHeaderValues));
     }
 }
